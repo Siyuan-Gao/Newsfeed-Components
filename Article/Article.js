@@ -122,74 +122,72 @@ const data = [
 
 //   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
-let makeArticle = (title, date, firstParagraph, secondParagraph, thirdParagraph)=>{
+const articles = document.querySelector('articles')
 
-const mainDiv = document.createElement('div');
+let makeArticle (title,date,p1,p2,p3) {
+const article = document.createElement('div');
 mainDiv.classList.add('article');
 
 const title = document.createElement('h2');
 title.textContent=title;
-mainDiv.appendChild(title);
+article.appendChild(title);
 
 
-const ArticleDate = document.createElement('p');
-ArticleDate.classList.add('date');
-ArticleDate.textContent = date;
-mainDiv.appendChild(date);
+const date = document.createElement('p');
+date.classList.add('date');
+date.textContent = date;
+article.appendChild(ArticleDate);
 
 
 const p1 = document.createElement('p');
 p1.textContent = firstParagraph;
-mainDiv.appendChild(p1);
+article.appendChild(p1);
 
 
 const p2 = document.createElement('p');
 p2.textContent = secondParagraph;
-mainDiv.appendChild(p2);
+article.appendChild(p2);
 
 
 const p3 = document.createElement('p');
 p3.textContent = thirdParagraph;
-mainDiv.appendChild(p3);
+article.appendChild(p3);
+
+expandSpan.textContent = 'Click to Expand';
+expandSpan.addEventListener('click', (e) => {
+  article.classList.toggle("article-open")
+});
+
+// const toggler = (event)=>{
+//   openButton.classList.toggle('article-open')
+//   buttonClose.classList.toggle('article')
+// }
+
+// const buttons = document.createElement('span');
+// buttons.classList.add('expandButton');
+// mainDiv.appendChild(buttons);
 
 
-const toggler = (event)=>{
-  openButton.classList.toggle('article-open')
-  buttonClose.classList.toggle('article')
+// const openButton = document.createElement('button')
+// openButton.classList.add('article-open')
+// openButton.textContent = "read more";
+// openButton.addEventListener('click', toggler)
+
+
+// const closeButton = document.createElement('button')
+// closeButton.classList.ad('close')
+// closeButton.textContent = "close"
+// closeButton.addEventListener('click', toggler)
+
+// buttons.appendChild(openButton);
+// buttons.appendChild(closeButton);
+
+return article;
 }
 
-const buttons = document.createElement('span');
-buttons.classList.add('expandButton');
-mainDiv.appendChild(buttons);
-
-
-const openButton = document.createElement('button')
-openButton.classList.add('article-open')
-openButton.textContent = "read more";
-openButton.addEventListener('click', toggler)
-
-
-const closeButton = document.createElement('button')
-closeButton.classList.ad('close')
-closeButton.textContent = "close"
-closeButton.addEventListener('click', toggler)
-
-buttons.appendChild(openButton);
-buttons.appendChild(closeButton);
-
-return mainDiv;
-}
-
-const mainDiv = document.querySelector('.article');
-
-data.forEach((currentItem) =>{
-  const newArticle = makeArticle(
-    currentItem.title, currentItem.date, currentItem.firstParagraph, currentItem.secondParagraph, currentItem.thirdParagraph
-  );
-  mainDiv.appendChild(makeArticle);
-}
-)
-
+data.map((article) => {
+  return articles.appendChild(makeArticle(article.title, article.date, article.firstParagraph, article.secondParagraph, article.thirdParagraph))
+})
 
 
 // data.forEach((content) =>{
