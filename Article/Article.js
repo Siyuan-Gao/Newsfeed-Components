@@ -122,42 +122,82 @@ const data = [
 
 //   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
-let makeArticle = (obj)=>{
+let makeArticle = (title, date, firstParagraph, secondParagraph, thirdParagraph)=>{
 
 const mainDiv = document.createElement('div');
-const title = document.createElement('h2')
-const date = document.createElement('p')
-const p1 = document.createElement('p')
-const p2 = document.createElement('p')
-const p3 = document.createElement('p')
-const expand = document.createElement('span')
-
-mainDiv.appendChild(title);
-mainDiv.appendChild(date);
-mainDiv.appendChild(p1);
-mainDiv.appendChild(p2);
-mainDiv.appendChild(p3);
-mainDiv.appendChild(expand);
-
-date.innerHTML=obj.date;
-title.innerHTML=obj.title;
-p1.innerHTML = obj.firstParagraph;
-p2.innerHTML = obj.secondParagraph;
-p3.innerHTML = obj.thirdParagraph;
-
-
 mainDiv.classList.add('article');
-date.classList.add('date');
-expand.classList.add('expandButton');
+
+const title = document.createElement('h2');
+title.textContent=title;
+mainDiv.appendChild(title);
 
 
+const ArticleDate = document.createElement('p');
+ArticleDate.classList.add('date');
+ArticleDate.textContent = date;
+mainDiv.appendChild(date);
 
 
-expandButton.addEventListener('click', event=>{
-  buttonOpen.classList.toggle('article-open')
+const p1 = document.createElement('p');
+p1.textContent = firstParagraph;
+mainDiv.appendChild(p1);
+
+
+const p2 = document.createElement('p');
+p2.textContent = secondParagraph;
+mainDiv.appendChild(p2);
+
+
+const p3 = document.createElement('p');
+p3.textContent = thirdParagraph;
+mainDiv.appendChild(p3);
+
+
+const toggler = (event)=>{
+  openButton.classList.toggle('article-open')
   buttonClose.classList.toggle('article')
 }
-)
+
+const buttons = document.createElement('span');
+buttons.classList.add('expandButton');
+mainDiv.appendChild(buttons);
+
+
+const openButton = document.createElement('button')
+openButton.classList.add('article-open')
+openButton.textContent = "read more";
+openButton.addEventListener('click', toggler)
+
+
+const closeButton = document.createElement('button')
+closeButton.classList.ad('close')
+closeButton.textContent = "close"
+closeButton.addEventListener('click', toggler)
+
+buttons.appendChild(openButton);
+buttons.appendChild(closeButton);
 
 return mainDiv;
 }
+
+const mainDiv = document.querySelector('.article');
+
+data.forEach((currentItem) =>{
+  const newArticle = makeArticle(
+    currentItem.title, currentItem.date, currentItem.firstParagraph, currentItem.secondParagraph, currentItem.thirdParagraph
+  );
+  mainDiv.appendChild(makeArticle);
+}
+)
+
+
+
+// data.forEach((content) =>{
+//   mainDiv.appendChild(makeArticle(
+//     data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph
+//   ))
+// })
+
+// data.map(data =>{
+//   makeArticle.appendChild(makeArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+// }) 
